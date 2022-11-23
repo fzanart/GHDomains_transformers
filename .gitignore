@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+
+lid.176.bin
+expanded_frame_final.csv
