@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}
+    GitHub Data Curator
+{% endblock %}
+
+{% block content %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {% endfor %}
+{% else %}
+<h1>Welcome to the GitHub Data Curator app</h1>
+{% endif %}
+{% endwith %}
+<form action="/download" method="POST">
+
+        <div class="input-group mb-3">
+        <span class="input-group-text" id="token">Github API token</span>
+        <input type="text" class="form-control" name="token" placeholder="Your GitHub token goes here" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+        <div class="input-group mb-3">
+        <span class="input-group-text" id="repos">Repository</span>
+        <input type="text" class="form-control" name="repos" placeholder="Please enter the repo you want to download data from" aria-label="Username" aria-describedby="basic-addon1">
+
+        </div>
+
+    Options:
+    <br>
+    <div class="form-check form-switch form-check-inline">
+        <input class="form-check-input" type="checkbox" id="mainSwitch" onchange="toggleSwitches(this)">
+        <label class="form-check-label text-start" for="mainSwitch">Select All</label>
+    </div>
+    <br>
+    <br>
+
+
+    <!-- README -->
+    <div class="form-check form-switch form-check-inline">
+        <input class="form-check-input" type="checkbox" role="switch" id="README" onchange="checkSwitches(this, mainSwitch)">
+        <label class="form-check-label text-start" for="README">README</label>
+    </div>
+
+    <!-- Description -->
+    <div class="form-check form-switch form-check-inline">
+        <input class="form-check-input" type="checkbox" role="switch" id="Description" onchange="checkSwitches(this, mainSwitch)">
+        <label class="form-check-label" for="Description">Description</label>
+    </div>
+
+    <!-- Topic tags -->
+    <div class="form-check form-switch form-check-inline">
+        <input class="form-check-input" type="checkbox" role="switch" id="Topics" onchange="checkSwitches(this, mainSwitch)">
+        <label class="form-check-label" for="Topics">Topic tags</label>
+    </div>
+    <br>
+
+    
+    <!-- Stars -->
+    <div class="form-check form-switch form-check-inline">
+        <input class="form-check-input" type="checkbox" role="switch" id="Stars" onchange="checkSwitches(this, mainSwitch)">
+        <label class="form-check-label" for="Stars">Stars</label>
+    </div>
+    
+    <!-- Forks -->
+    <div class="form-check form-switch form-check-inline">
+        <input class="form-check-input" type="checkbox" role="switch" id="Forks" onchange="checkSwitches(this, mainSwitch)">
+        <label class="form-check-label" for="Forks">Forks</label>
+    </div>
+    
+    <!-- Releases -->
+    <div class="form-check form-switch form-check-inline">
+        <input class="form-check-input" type="checkbox" role="switch" id="Releases" onchange="checkSwitches(this, mainSwitch)">
+        <label class="form-check-label" for="Releases">Releases</label>
+    </div>
+    <br>
+    <!-- programming languages -->
+    <div class="form-check form-switch form-check-inline">
+        <input class="form-check-input" type="checkbox" role="switch" id="langs" onchange="checkSwitches(this, mainSwitch)">
+        <label class="form-check-label" for="langs">Programming languages</label>
+    </div>
+    <!-- Licence -->
+    <div class="form-check form-switch form-check-inline">
+        <input class="form-check-input" type="checkbox" role="switch" id="Licence" onchange="checkSwitches(this, mainSwitch)">
+        <label class="form-check-label" for="Licence">Licence</label>
+    </div>
+
+    <br>
+    <br>
+    
+    <button class="btn btn-primary" type="submit">Download</button>
+</form>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+{% endblock %}
